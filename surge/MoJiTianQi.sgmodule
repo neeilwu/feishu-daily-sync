@@ -1,0 +1,9 @@
+#!name=墨迹天气 VIP
+#!desc=墨迹天气会员解锁 + 短视频去广告（手搓版，修复 max-size 与裸域名匹配问题）
+#!author=木木
+
+[Script]
+墨迹天气 = type=http-response,pattern=^https?:\/\/([a-z0-9-]+\.)*api\.moji\.com\/(sns\/json\/profile\/get_info.*|json\/member_new\/homepage_info.*|user\/personal\/json\/profile.*|flycard\/novice|shortvideo\/.*),requires-body=true,max-size=-1,script-path=https://cdn.jsdelivr.net/gh/neeilwu/feishu-daily-sync@main/surge/MoJiTianQi.js,timeout=60
+
+[MITM]
+hostname = %APPEND% api.moji.com, *.api.moji.com
