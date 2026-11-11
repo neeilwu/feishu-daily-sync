@@ -12,10 +12,9 @@
 //   [MITM]
 //   hostname = %APPEND% api.moji.com, *.api.moji.com
 //
-// 调试：DEBUG=true 时，命中会员接口会弹一条通知，证明脚本跑起来了。
-// 确认能用后，把下面改成 false 就不弹了。
-
-const DEBUG = true;
+// 调试：命中会员接口时，console.log 会写进 Surge 流量查看器里该请求的备注，
+// 形如 "[MoJi] patched: get_info"。Surge 脚本没有弹通知的接口，
+// 所以不靠通知判断，只看备注里的日志行。
 const EXPIRE = 4092599349000; // 2099-09-09
 const EXPIRE_STR = "2099-09-09到期";
 
@@ -117,9 +116,6 @@ try {
 
   if (hit) {
     console.log("[MoJi] patched: " + hit);
-    if (DEBUG && hit !== "shortvideo" && typeof $notification !== "undefined") {
-      $notification.post("墨迹天气脚本已触发", hit, "会员接口已改写，去看下会员页");
-    }
   }
   $done({ body: JSON.stringify(out) });
 } catch (e) {
